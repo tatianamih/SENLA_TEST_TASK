@@ -1,4 +1,5 @@
-package task2;
+package senla.mikhalchenko.task2;
+
 import java.util.Scanner;
 
 /*Напишите программу, которая возвращает сумму цифр, присутствующих в данной строке.
