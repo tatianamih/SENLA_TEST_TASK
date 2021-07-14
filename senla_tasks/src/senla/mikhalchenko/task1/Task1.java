@@ -1,4 +1,4 @@
-package task1;
+package senla.mikhalchenko.task1;
 /*Напишите программу, которая возвращает количество "троек" в заданной строке.
 Тройка - это символ, появляющийся три раза подряд в строке.*/
 
@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Task1 {
+
     private void getRepeatedCharactersInARowXTimes(String text, int numberOfDuplicateElements) {
         int count = 0;
         Matcher matcher = Pattern.compile("(.)\\1+").matcher(text);
