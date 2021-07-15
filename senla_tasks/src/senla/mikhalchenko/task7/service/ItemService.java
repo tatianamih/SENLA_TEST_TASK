@@ -45,7 +45,6 @@ public class ItemService {
 
     public List<Item> putItemInTheSafeWithMaxPrice(List<Item> sortedList, int volume) {
         List<Item> resultList = new ArrayList<>();
-        //   printNumberException();
         safe.setVolume(volume);
 
         for (int i = 0; i < sortedList.size(); i++) {
