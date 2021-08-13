@@ -1,46 +1,54 @@
 package senla.mikhalchenko.task5.service;
 
 public class StringService {
-
-    final static String[] vowels = {"a", "A", "o", "O", "i", "I", "y", "Y", "u", "U", "e", "E",
-            "у", "У", "е", "Е", "ы", "Ы", "А", "а", "о", "О", "я", "Я", "и", "И", "ю", "Ю", "Э", "э"};
-
-    public String[] getArrayByDelimiter(String text) {
-        String[] textSplit = text.split("\\s");
-        for (int i = 0; i < textSplit.length; i++) {
+    public void printTheWordsAndTheNumberOfVowels(String str) {
+        String[] words = getArrayByDelimiter(str);
+        for (String word : words) {
+            int vowels = getNumberOfVowels(word);
+            System.out.println("Word '" + word + "' has " + vowels + " vowels.");
         }
-        return textSplit;
     }
 
-    public int[] countTheNumberOfVowelsInWords(String[] words) {
+    public String[] getArrayByDelimiter(String str) {
+        return str.split(" ");
+    }
 
-        int count = 0;
-        int[] numberOfVowelsInAWord = new int[words.length];
-        for (int i = 0; i < words.length; i++) {
-            for (int j = 0; j < vowels.length; j++) {
-                if (words[i].contains(vowels[j])) {
-                    count++;
-                    numberOfVowelsInAWord[i] = count;
-                }
+    private int getNumberOfVowels(String str) {
+        String vowelString = "AEIOUYaeiouyУуЕеЫыАаОоЯяЭэИиЮю";
+        int counter = 0;
+        char[] wordChars = wordDivider(str);
+        for (char ch : wordChars) {
+            if (vowelString.contains(String.valueOf(ch))) {
+                counter++;
             }
-            count = 0;
         }
-        return numberOfVowelsInAWord;
+        return counter;
     }
 
-    public void printTheWordsAndTheNumberOfVowels(String[] words, int[] numberOfVowels) {
-        for (int i = 0; i < words.length; i++) {
-            System.out.println("In the word " + "{" + words[i] + "} -  {"
-                    + numberOfVowels[i] + "} vowels");
-        }
+    private char[] wordDivider(String word) {
+        return word.toCharArray();
     }
 
-    public void printWordsSortedByNumberOfVowels(String[] words, int[] numberOfVowels) {
+    private int[] findTheNumberOfVowels(String str) {
+        int i = 0;
+        String[] words = getArrayByDelimiter(str);
+        int[] numberArray = new int[words.length];
+        for (String word : words) {
+            int vowels = getNumberOfVowels(word);
+            numberArray[i] = vowels;
+            i++;
+        }
+        return numberArray;
+    }
 
+
+    public void printWordsSortedByNumberOfVowels(String str) {
+        String[] words = getArrayByDelimiter(str);
+        int[] numberOfVowels = findTheNumberOfVowels(str);
         for (int i = 0; i < words.length; i++) {
             for (int j = i + 1; j < numberOfVowels.length; j++) {
-                int itmp = 0;
-                String stmp = null;
+                int itmp;
+                String stmp;
                 if (numberOfVowels[i] > numberOfVowels[j]) {
                     itmp = numberOfVowels[i];
                     numberOfVowels[i] = numberOfVowels[j];
@@ -51,14 +59,23 @@ public class StringService {
                 }
             }
         }
-        System.out.println("Sorting by the number of vowel letters is:");
+        System.out.println("Sorting by the number of vowel letters is ");
         for (int i = words.length - 1; i >= 0; i--) {
             System.out.println(words[i] + " - " + numberOfVowels[i]);
         }
     }
 
-    public int[] indexOfVowelsForUpperCase(String[] words) {
+    public void toUpperCaseForFirstVowelLetter(String str) {
+        String[] words = getArrayByDelimiter(str);
+        int[] indexOfFirstVowel = indexOfVowelsForUpperCase(words);
+        for (int i = 0; i < words.length; i++) {
+            System.out.print(words[i].substring(0, indexOfFirstVowel[i]) +
+                    words[i].substring(indexOfFirstVowel[i], indexOfFirstVowel[i] + 1).toUpperCase() +
+                    words[i].substring(indexOfFirstVowel[i] + 1, words[i].length()) + " ");
+        }
+    }
 
+    public int[] indexOfVowelsForUpperCase(String[] words) {
         int index;
         int[] indexOfFirstVowelsInAWord = new int[words.length];
         for (int i = 0; i < words.length; i++) {
@@ -69,17 +86,7 @@ public class StringService {
                     break;
                 }
             }
-
         }
         return indexOfFirstVowelsInAWord;
     }
-
-    public void toUpperCaseForFirstVowelLetter(String[] words, int[] indexOfFirstVowel) {
-
-        for (int i = 0; i < words.length; i++) {
-            System.out.print(words[i].substring(0, indexOfFirstVowel[i]) +
-                    words[i].substring(indexOfFirstVowel[i], indexOfFirstVowel[i] + 1).toUpperCase() +
-                    words[i].substring(indexOfFirstVowel[i] + 1, words[i].length()) + " ");
-        }
-    }
-}
+ }
