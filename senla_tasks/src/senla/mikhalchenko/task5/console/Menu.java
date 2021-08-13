@@ -23,19 +23,20 @@ public class Menu {
     public void mainMenu() {
         System.out.println("Input you string in Russian or English");
         String str = scanner.nextLine();
-        String[] words = service.getArrayByDelimiter(str);
+       String[] words = service.getArrayByDelimiter(str);
+
         int choice;
         while (true) {
             choice = getAnswerFromMenu(startMessage, 4);
             switch (choice) {
                 case 1:
-                    service.printTheWordsAndTheNumberOfVowels(words, service.countTheNumberOfVowelsInWords(words));
+                    service.printTheWordsAndTheNumberOfVowels(str);
                     break;
                 case 2:
-                    service.printWordsSortedByNumberOfVowels(words, service.countTheNumberOfVowelsInWords(words));
+                 service.printWordsSortedByNumberOfVowels(str);
                     break;
                 case 3:
-                    service.toUpperCaseForFirstVowelLetter(words, service.indexOfVowelsForUpperCase(words));
+                    service.toUpperCaseForFirstVowelLetter(str);
                     break;
                 case 4:
                     return;
